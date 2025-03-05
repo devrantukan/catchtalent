@@ -1,0 +1,47 @@
+{
+  "Navigation": {
+    "home": "Ana Sayfa",
+    "portfolio": "Portfolyo",
+    "whoAreWe": "Biz Kimiz",
+    "about": "Hakkımızda",
+    "contact": "İletişim"
+  },
+  "Pages": {
+    "whoAreWe": {
+      "content": "Biz kimiz sayfası içeriği buraya gelecek..."
+    },
+    "contact": {
+      "content": "İletişim sayfası içeriği buraya gelecek..."
+    }
+  },
+  "Form": {
+    "title": "Etkinlik Kaydı",
+    "labels": {
+      "firstName": "Ad",
+      "lastName": "Soyad",
+      "email": "E-posta",
+      "phone": "Telefon",
+      "date": "Tarih",
+      "time": "Saat"
+    },
+    "placeholders": {
+      "phone": "Telefon numaranızı girin"
+    },
+    "errors": {
+      "firstName": "Ad gereklidir",
+      "lastName": "Soyad gereklidir",
+      "email": "Geçerli e-posta gereklidir",
+      "phone": "Telefon numarası gereklidir",
+      "date": "Tarih gereklidir",
+      "time": "Saat gereklidir",
+      "submitError": "Bir hata oluştu"
+    },
+    "button": {
+      "submit": "Kayıt Ol",
+      "submitting": "Kaydediliyor..."
+    },
+    "registrationSuccess": "Kayıt başarılı!",
+    "registrationFailed": "Kayıt başarısız oldu",
+    "errorOccurred": "Bir hata oluştu"
+  }
+} 

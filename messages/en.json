@@ -1,0 +1,46 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "events": "Events",
+    "portfolio": "Portfolio",
+    "whoAreWe": "Who Are We",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "Pages": {
+    "whoAreWe": {
+      "content": "Catch Talent, as a creative production company, brings brands' stories together with impressive visual narratives. With our experienced team and innovative approach, we bring a unique perspective to each project.",
+      "secondParagraph": "Our team, providing services at international standards, specializes in commercial films, corporate videos, and digital content production. Aiming for the highest quality in every project, we successfully bring brands' visions to the screen."
+    },
+    "contact": {
+      "content": "Contact page content goes here..."
+    }
+  },
+  "Form": {
+    "title": "Event Registration",
+    "labels": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "date": "Date",
+      "time": "Time"
+    },
+    "placeholders": {
+      "phone": "Enter your phone number"
+    },
+    "errors": {
+      "firstName": "First name is required",
+      "lastName": "Last name is required",
+      "email": "Valid email is required",
+      "phone": "Phone number is required",
+      "date": "Date is required",
+      "time": "Time is required",
+      "submitError": "An error occurred"
+    },
+    "button": {
+      "submit": "Register",
+      "submitting": "Registering..."
+    }
+  }
+} 
