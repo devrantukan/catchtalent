@@ -52,7 +52,7 @@ export default function BizKimiz() {
           >
             <div className="relative aspect-square rounded-lg overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059"
+                src="/hikayemiz.jpeg"
                 alt="Catch Talent Hakkında"
                 fill
                 className="object-cover"
@@ -61,13 +61,18 @@ export default function BizKimiz() {
             <div className="space-y-6">
               <h2 className="text-3xl font-bold">Hikayemiz</h2>
               <p className="text-gray-300">
-                Catch Talent, cast direktörü Özgün Ozan tarafından kuruldu. 2013
-                yılından bu yana Türkiye, Avrupa ve Orta Doğu’daki yetenekler ve
-                yapım şirketleri ile iş birliği yaparak reklam, moda fotoğraf
+                Catch Talent, cast direktörü Özgün Ozan tarafından kuruldu.{" "}
+                <br /> <br /> 2013 yılından bu yana reklam, moda fotoğraf
                 çekimleri, uzun metraj filmler, kısa filmler, belgeseller ve
-                müzik klipleri gibi çeşitli medya projelerine katkı sağlıyoruz.
-                Yıllara dayanan sektör deneyimimizle, her projeye sanatsal ve
-                profesyonel çözümler sunan benzersiz bir vizyonla yaklaşıyoruz.
+                müzik klipleri gibi farklı medya projeleri için Türkiye, Avrupa
+                ve Orta Doğu’daki yetenekler ve yapım firmaları ile çalışıyor;
+                her projeye özel bir vizyonla yaklaşarak sanatsal ve profesyonel
+                çözümler sunuyoruz. <br /> <br /> Uluslararası bağlantılarımız
+                ve sektördeki uzmanlığımız sayesinde, özellikle ortak yapımlar
+                için yalnızca yabancı dil konuşan oyuncuları değil, yönetmenleri
+                ve set ekiplerini de bir araya getiriyoruz. <br /> <br /> 🎬
+                Catch Talent, sektörün en iyi yeteneklerini keşfetmek ve
+                projelerinize değer katmak için burada!
               </p>
             </div>
           </motion.div>
@@ -94,7 +99,7 @@ export default function BizKimiz() {
             </div>
             <div className="relative aspect-square rounded-lg overflow-hidden md:order-1">
               <Image
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070"
+                src="/vizyonumuz.jpeg"
                 alt="Vizyonumuz"
                 fill
                 className="object-cover"

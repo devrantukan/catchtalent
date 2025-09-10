@@ -52,7 +52,7 @@ export default function WhoAreWe() {
           >
             <div className="relative aspect-square rounded-lg overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059"
+                src="/hikayemiz.jpeg"
                 alt="About Catch Talent"
                 fill
                 className="object-cover"
@@ -61,14 +61,21 @@ export default function WhoAreWe() {
             <div className="space-y-6">
               <h2 className="text-3xl font-bold">Our Story</h2>
               <p className="text-gray-300">
-                Catch Talent was founded by casting director Özgün Ozan. Since
-                2013, we have been collaborating with talents and production
-                companies across Turkey, Europe, and the Middle East for various
-                media projects, including commercials, fashion photoshoots,
-                feature films, short films, documentaries, and music videos.
-                With years of experience in the industry, we approach each
-                project with a unique vision, offering artistic and professional
-                solutions.
+                Catch Talent was founded by casting director Özgün Ozan.
+                <br /> <br />
+                Since 2013, we have been collaborating with talents and
+                production companies across Turkey, Europe, and the Middle East
+                for various media projects, including commercials, fashion
+                photoshoots, feature films, short films, documentaries, and
+                music videos. We approach each project with a unique vision,
+                offering artistic and professional solutions.
+                <br /> <br />
+                With our international network and industry expertise, we bring
+                together not only multilingual actors but also directors and
+                crew members, particularly for co-productions.
+                <br /> <br />
+                🎬 Catch Talent is here to discover the best talents and add
+                value to your projects!
               </p>
             </div>
           </motion.div>
@@ -95,7 +102,7 @@ export default function WhoAreWe() {
             </div>
             <div className="relative aspect-square rounded-lg overflow-hidden md:order-1">
               <Image
-                src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?q=80&w=2069"
+                src="/vizyonumuz.jpeg"
                 alt="Our Vision"
                 fill
                 className="object-cover"

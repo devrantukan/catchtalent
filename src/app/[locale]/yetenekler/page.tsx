@@ -12,7 +12,7 @@ export default function YeteneklerPage() {
           transition={{ duration: 0.8 }}
           className="text-4xl md:text-5xl font-bold mb-8"
         >
-          Yetenekler İçin
+          Oyuncular İçin
         </motion.h1>
 
         <motion.div
@@ -22,8 +22,23 @@ export default function YeteneklerPage() {
           className="prose prose-invert max-w-none"
         >
           <p className="text-xl mb-6">
-            İstisnai yetenekler kadromuza katılın ve kariyerinizi bir üst
-            seviyeye taşıyın.
+            Oyunculuk, sadece bir yetenek değil, aynı zamanda doğru fırsatlarla
+            gelişen bir yolculuktur. Catch Talent olarak, yeni yetenekleri
+            keşfetmek ve deneyimli isimleri projelerimizle buluşturmak için
+            buradayız.
+            <br /> <br />
+            Menajerlik hizmeti vermiyor, oyuncu temsili yapmıyoruz. Sizi
+            yalnızca cast direktörlüğünü yaptığımız projeler için
+            değerlendiriyoruz. Eğer sözleşmeli olarak çalıştığınız bir ajans
+            varsa, lütfen bunu kayıt formunda belirtin. Sizin için uygun
+            projeler olduğunda, süreci en sağlıklı şekilde ilerletebilmek adına
+            ajansınızla doğrudan iletişime geçebiliriz.
+            <br /> <br />
+            Her şey birkaç fotoğraf ve sizi daha yakından tanıyabileceğimiz kısa
+            bir tanıtım videosu ile başlıyor. 😊 Kendinizi göstermeye ve
+            yeteneğinizi sergilemeye hazır mısınız?
+            <br /> <br />
+            Sizi de aramızda görmek için sabırsızlanıyoruz!
           </p>
           {/* Add more content as needed */}
         </motion.div>

@@ -22,8 +22,30 @@ export default function Producers() {
           className="prose prose-invert max-w-none"
         >
           <p className="text-xl mb-6">
-            Yaratıcı projeleriniz için sizi istisnai yeteneklerle
-            buluşturuyoruz.
+            Doğru Oyuncu, Güçlü Yapım
+            <br /> <br />
+            Bir yapımın başarısında hikâyeyi taşıyan en önemli unsurlardan biri
+            doğru oyuncu seçimidir. Cast süreci, sadece bir liste oluşturmak
+            değil, projenin ruhuna en uygun yetenekleri bulmak ve yönetmenle
+            birlikte en iyi performansı ortaya çıkaracak oyuncuları
+            belirlemektir.
+            <br /> <br />
+            Biz, hikâyenizin gereksinimlerini en ince ayrıntısına kadar analiz
+            ediyor, karakterlerinizi en iyi şekilde yansıtacak oyuncuları
+            belirlemek için titizlikle çalışıyoruz. Yalnızca deneyimli isimleri
+            değil, aynı zamanda yeni yetenekleri keşfetmeye de odaklanıyoruz.
+            <br /> <br />
+            Süreç boyunca sizlere hızlı, verimli ve yaratıcı çözümlerle, ulusal
+            ve uluslararası oyuncu havuzumuzdaki n en iyi seçenekleri sunarak
+            zaman ve bütçe yönetimini optimize ediyoruz.
+            <br /> <br />
+            Her projeye özel yaklaşıyoruz ve sadece oyuncu seçiminde değil, set
+            içi oyuncu yönetimi ve gerektiğinde oyuncu koçluğu ile de projeye
+            katkı sağlıyoruz. Deneyimimiz ve sektördeki bağlantılarımız
+            sayesinde, prodüksiyon sürecinizin en önemli aşamalarından biri olan
+            cast sürecini sizin için sorunsuz ve verimli hale getiriyoruz.
+            <br /> <br />
+            Doğru oyuncularla güçlü projeler yaratmak için buradayız.
           </p>
           {/* Add more content as needed */}
         </motion.div>
