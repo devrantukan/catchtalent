@@ -24,7 +24,7 @@ export default function Iletisim() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-bold mb-16 text-center"
+          className="text-2xl md:text-3xl font-bold mb-16 text-center"
         >
           İletişim
         </motion.h1>
@@ -39,10 +39,6 @@ export default function Iletisim() {
           >
             <div>
               <h2 className="text-2xl font-bold mb-4">Bize Ulaşın</h2>
-              <p className="text-gray-300">
-                Bir sorunuz mu var veya bizimle çalışmak mı istiyorsunuz? Sizden
-                haber almaktan mutluluk duyarız.
-              </p>
             </div>
 
             <div className="space-y-4">

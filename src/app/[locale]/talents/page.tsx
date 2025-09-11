@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Talents() {
   return (
@@ -10,7 +11,7 @@ export default function Talents() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-bold mb-8"
+          className="text-2xl md:text-3xl font-bold mb-8"
         >
           For Talents
         </motion.h1>
@@ -21,7 +22,7 @@ export default function Talents() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="prose prose-invert max-w-none"
         >
-          <p className="text-xl mb-6">
+          <p className="text mb-6">
             Acting is not just a talent; it is a journey that flourishes with
             the right opportunities. At Catch Talent, we are here to discover
             new talents and connect experienced actors with exciting projects.
@@ -39,6 +40,15 @@ export default function Talents() {
             <br /> <br />
             We can&apos;t wait to have you on board!
           </p>
+
+          <div className="text-center mt-8">
+            <Link
+              href="/talents/register"
+              className="inline-block bg-white text-black px-8 py-4 rounded-lg font-medium text-lg hover:bg-gray-200 transition-colors"
+            >
+              Register Now
+            </Link>
+          </div>
           {/* Add more content as needed */}
         </motion.div>
       </div>

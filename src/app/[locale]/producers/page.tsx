@@ -10,7 +10,7 @@ export default function Producers() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-bold mb-8"
+          className="text-2xl md:text-3xl font-bold mb-8"
         >
           For Producers
         </motion.h1>
@@ -21,7 +21,7 @@ export default function Producers() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="prose prose-invert max-w-none"
         >
-          <p className="text-xl mb-6">
+          <p className="text mb-6">
             The Right Actor, A Strong Production
             <br /> <br />
             One of the most important elements in the success of a production is

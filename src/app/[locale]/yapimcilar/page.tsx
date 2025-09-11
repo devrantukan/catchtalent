@@ -10,7 +10,7 @@ export default function Producers() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-bold mb-8"
+          className="text-2xl md:text-3xl font-bold mb-8"
         >
           Yapımcılar İçin
         </motion.h1>
@@ -21,7 +21,7 @@ export default function Producers() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="prose prose-invert max-w-none"
         >
-          <p className="text-xl mb-6">
+          <p className="text mb-6">
             Doğru Oyuncu, Güçlü Yapım
             <br /> <br />
             Bir yapımın başarısında hikâyeyi taşıyan en önemli unsurlardan biri
@@ -36,7 +36,7 @@ export default function Producers() {
             değil, aynı zamanda yeni yetenekleri keşfetmeye de odaklanıyoruz.
             <br /> <br />
             Süreç boyunca sizlere hızlı, verimli ve yaratıcı çözümlerle, ulusal
-            ve uluslararası oyuncu havuzumuzdaki n en iyi seçenekleri sunarak
+            ve uluslararası oyuncu havuzumuzdaki en iyi seçenekleri sunarak
             zaman ve bütçe yönetimini optimize ediyoruz.
             <br /> <br />
             Her projeye özel yaklaşıyoruz ve sadece oyuncu seçiminde değil, set

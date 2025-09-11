@@ -24,7 +24,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-bold mb-16 text-center"
+          className="text-2xl md:text-3xl font-bold mb-16 text-center"
         >
           Contact Us
         </motion.h1>
@@ -39,10 +39,6 @@ export default function Contact() {
           >
             <div>
               <h2 className="text-2xl font-bold mb-4">Get in Touch</h2>
-              <p className="text-gray-300">
-                Have a question or want to work with us? We&apos;d love to hear
-                from you.
-              </p>
             </div>
 
             <div className="space-y-4">
