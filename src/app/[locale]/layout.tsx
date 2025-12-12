@@ -6,7 +6,7 @@ import Script from "next/script";
 
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +23,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   const { locale } = await params;
 
   // Enable static rendering
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
 
   // Validate that the incoming `locale` parameter is valid
   if (!locales.includes(locale as (typeof locales)[number])) {

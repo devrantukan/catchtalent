@@ -3,76 +3,54 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
+import { useTalentRegistration } from "@/hooks/useTalentRegistration";
 
 export default function TalentRegistration() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    age: "",
-    gender: "",
-    height: "",
-    weight: "",
-    eyeColor: "",
-    hairColor: "",
-    languages: "",
-    experience: "",
-    agency: "",
-    agencyContact: "",
-    specialSkills: "",
-    availability: "",
-    location: "",
-    bio: "",
-  });
+  const { form, isSubmitting, submitError, submitSuccess, onSubmit } =
+    useTalentRegistration();
+  const {
+    register,
+    formState: { errors },
+    setValue,
+  } = form;
 
   const [photos, setPhotos] = useState<File[]>([]);
   const [video, setVideo] = useState<File | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const newPhotos = Array.from(e.target.files);
-      setPhotos((prev) => [...prev, ...newPhotos].slice(0, 10)); // Max 10 photos
+      console.log(
+        "Selected photos:",
+        newPhotos.map((photo) => ({
+          name: photo.name,
+          type: photo.type,
+          size: photo.size,
+        }))
+      );
+      const updatedPhotos = [...photos, ...newPhotos].slice(0, 10); // Max 10 photos
+      setPhotos(updatedPhotos);
+      setValue("photos", updatedPhotos);
     }
   };
 
   const handleVideoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setVideo(e.target.files[0]);
+      const selectedVideo = e.target.files[0];
+      console.log("Selected video:", {
+        name: selectedVideo.name,
+        type: selectedVideo.type,
+        size: selectedVideo.size,
+      });
+      setVideo(selectedVideo);
+      setValue("video", selectedVideo);
     }
   };
 
   const removePhoto = (index: number) => {
-    setPhotos((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Here you would typically send the data to your backend
-    console.log("Form data:", formData);
-    console.log("Photos:", photos);
-    console.log("Video:", video);
-
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    setIsSubmitting(false);
-    alert("Registration submitted successfully! We will contact you soon.");
+    const updatedPhotos = photos.filter((_, i) => i !== index);
+    setPhotos(updatedPhotos);
+    setValue("photos", updatedPhotos);
   };
 
   return (
@@ -93,11 +71,37 @@ export default function TalentRegistration() {
           </p>
         </motion.div>
 
+        {submitSuccess && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-green-900/50 border border-green-500 rounded-lg p-6 mb-8"
+          >
+            <h3 className="text-green-400 font-bold text-lg mb-2">
+              Registration Successful!
+            </h3>
+            <p className="text-green-300">
+              Registration submitted successfully! We will contact you soon.
+            </p>
+          </motion.div>
+        )}
+
+        {submitError && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-red-900/50 border border-red-500 rounded-lg p-6 mb-8"
+          >
+            <h3 className="text-red-400 font-bold text-lg mb-2">Error!</h3>
+            <p className="text-red-300">{submitError}</p>
+          </motion.div>
+        )}
+
         <motion.form
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          onSubmit={handleSubmit}
+          onSubmit={onSubmit}
           className="space-y-8"
         >
           {/* Personal Information */}
@@ -116,12 +120,14 @@ export default function TalentRegistration() {
                 <input
                   type="text"
                   id="firstName"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleInputChange}
+                  {...register("firstName")}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
-                  required
                 />
+                {errors.firstName && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.firstName.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label
@@ -133,12 +139,14 @@ export default function TalentRegistration() {
                 <input
                   type="text"
                   id="lastName"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
+                  {...register("lastName")}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
-                  required
                 />
+                {errors.lastName && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.lastName.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label
@@ -150,12 +158,14 @@ export default function TalentRegistration() {
                 <input
                   type="email"
                   id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
+                  {...register("email")}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
-                  required
                 />
+                {errors.email && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label
@@ -167,12 +177,14 @@ export default function TalentRegistration() {
                 <input
                   type="tel"
                   id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
+                  {...register("phone")}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
-                  required
                 />
+                {errors.phone && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.phone.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label htmlFor="age" className="block text-sm font-medium mb-2">
@@ -181,12 +193,14 @@ export default function TalentRegistration() {
                 <input
                   type="number"
                   id="age"
-                  name="age"
-                  value={formData.age}
-                  onChange={handleInputChange}
+                  {...register("age", { valueAsNumber: true })}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
-                  required
                 />
+                {errors.age && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.age.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label
@@ -197,17 +211,19 @@ export default function TalentRegistration() {
                 </label>
                 <select
                   id="gender"
-                  name="gender"
-                  value={formData.gender}
-                  onChange={handleInputChange}
+                  {...register("gender")}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
-                  required
                 >
                   <option value="">Select</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                   <option value="other">Other</option>
                 </select>
+                {errors.gender && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.gender.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -223,64 +239,76 @@ export default function TalentRegistration() {
                   htmlFor="height"
                   className="block text-sm font-medium mb-2"
                 >
-                  Height (cm)
+                  Height (cm) *
                 </label>
                 <input
                   type="number"
                   id="height"
-                  name="height"
-                  value={formData.height}
-                  onChange={handleInputChange}
+                  {...register("height", { valueAsNumber: true })}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
                 />
+                {errors.height && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.height.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label
                   htmlFor="weight"
                   className="block text-sm font-medium mb-2"
                 >
-                  Weight (kg)
+                  Weight (kg) *
                 </label>
                 <input
                   type="number"
                   id="weight"
-                  name="weight"
-                  value={formData.weight}
-                  onChange={handleInputChange}
+                  {...register("weight", { valueAsNumber: true })}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
                 />
+                {errors.weight && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.weight.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label
                   htmlFor="eyeColor"
                   className="block text-sm font-medium mb-2"
                 >
-                  Eye Color
+                  Eye Color *
                 </label>
                 <input
                   type="text"
                   id="eyeColor"
-                  name="eyeColor"
-                  value={formData.eyeColor}
-                  onChange={handleInputChange}
+                  {...register("eyeColor")}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
                 />
+                {errors.eyeColor && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.eyeColor.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label
                   htmlFor="hairColor"
                   className="block text-sm font-medium mb-2"
                 >
-                  Hair Color
+                  Hair Color *
                 </label>
                 <input
                   type="text"
                   id="hairColor"
-                  name="hairColor"
-                  value={formData.hairColor}
-                  onChange={handleInputChange}
+                  {...register("hairColor")}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
                 />
+                {errors.hairColor && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.hairColor.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -296,30 +324,31 @@ export default function TalentRegistration() {
                   htmlFor="languages"
                   className="block text-sm font-medium mb-2"
                 >
-                  Languages Spoken
+                  Languages Spoken *
                 </label>
                 <input
                   type="text"
                   id="languages"
-                  name="languages"
-                  value={formData.languages}
-                  onChange={handleInputChange}
+                  {...register("languages")}
                   placeholder="e.g., English, Turkish, German"
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
                 />
+                {errors.languages && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.languages.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label
                   htmlFor="experience"
                   className="block text-sm font-medium mb-2"
                 >
-                  Acting Experience
+                  Acting Experience *
                 </label>
                 <select
                   id="experience"
-                  name="experience"
-                  value={formData.experience}
-                  onChange={handleInputChange}
+                  {...register("experience")}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
                 >
                   <option value="">Select</option>
@@ -333,23 +362,31 @@ export default function TalentRegistration() {
                   <option value="experienced">Experienced (5+ years)</option>
                   <option value="professional">Professional</option>
                 </select>
+                {errors.experience && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.experience.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label
                   htmlFor="specialSkills"
                   className="block text-sm font-medium mb-2"
                 >
-                  Special Skills
+                  Special Skills *
                 </label>
                 <textarea
                   id="specialSkills"
-                  name="specialSkills"
-                  value={formData.specialSkills}
-                  onChange={handleInputChange}
+                  {...register("specialSkills")}
                   rows={3}
                   placeholder="Dancing, music, sports, action, etc."
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white resize-none"
                 />
+                {errors.specialSkills && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.specialSkills.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -365,33 +402,39 @@ export default function TalentRegistration() {
                   htmlFor="agency"
                   className="block text-sm font-medium mb-2"
                 >
-                  Agency Name (If any)
+                  Agency Name *
                 </label>
                 <input
                   type="text"
                   id="agency"
-                  name="agency"
-                  value={formData.agency}
-                  onChange={handleInputChange}
+                  {...register("agency")}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
                 />
+                {errors.agency && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.agency.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label
                   htmlFor="agencyContact"
                   className="block text-sm font-medium mb-2"
                 >
-                  Agency Contact Information
+                  Agency Contact Information *
                 </label>
                 <input
                   type="text"
                   id="agencyContact"
-                  name="agencyContact"
-                  value={formData.agencyContact}
-                  onChange={handleInputChange}
+                  {...register("agencyContact")}
                   placeholder="Email or phone"
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
                 />
+                {errors.agencyContact && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.agencyContact.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -406,7 +449,7 @@ export default function TalentRegistration() {
               full-body shots. * Standing in front of a plain background with
               good lighting, free of objects, furniture, or doors/windows, will
               make you look better. * Wear casual clothes and ensure you have a
-              neat appearance. Light makeup is important for women. * Don’t
+              neat appearance. Light makeup is important for women. * Don&apos;t
               forget to smile.
             </p>
             <div className="space-y-6">
@@ -430,6 +473,11 @@ export default function TalentRegistration() {
                 <p className="text-sm text-gray-400 mt-2">
                   Professional headshots and full body photos are preferred.
                 </p>
+                {errors.photos && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.photos.message}
+                  </p>
+                )}
                 {photos.length > 0 && (
                   <div className="mt-4">
                     <p className="text-sm text-gray-300 mb-2">
@@ -462,7 +510,7 @@ export default function TalentRegistration() {
                   htmlFor="video"
                   className="block text-sm font-medium mb-2"
                 >
-                  Introduction Video (Maximum 2 minutes)
+                  Introduction Video (Maximum 2 minutes) *
                 </label>
                 <input
                   type="file"
@@ -473,8 +521,13 @@ export default function TalentRegistration() {
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-white file:text-black hover:file:bg-gray-200"
                 />
                 <p className="text-sm text-gray-400 mt-2">
-                  A short video introducing yourself. (Optional)
+                  A short video introducing yourself.
                 </p>
+                {errors.video && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.video.message}
+                  </p>
+                )}
                 {video && (
                   <div className="mt-2">
                     <p className="text-sm text-gray-300">
@@ -497,29 +550,30 @@ export default function TalentRegistration() {
                   htmlFor="location"
                   className="block text-sm font-medium mb-2"
                 >
-                  City
+                  City *
                 </label>
                 <input
                   type="text"
                   id="location"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleInputChange}
+                  {...register("location")}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
                 />
+                {errors.location && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.location.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label
                   htmlFor="availability"
                   className="block text-sm font-medium mb-2"
                 >
-                  Availability
+                  Availability *
                 </label>
                 <select
                   id="availability"
-                  name="availability"
-                  value={formData.availability}
-                  onChange={handleInputChange}
+                  {...register("availability")}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white"
                 >
                   <option value="">Select</option>
@@ -528,20 +582,28 @@ export default function TalentRegistration() {
                   <option value="weekends">Weekends</option>
                   <option value="project-based">Project Based</option>
                 </select>
+                {errors.availability && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.availability.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label htmlFor="bio" className="block text-sm font-medium mb-2">
-                  About You
+                  About You *
                 </label>
                 <textarea
                   id="bio"
-                  name="bio"
-                  value={formData.bio}
-                  onChange={handleInputChange}
+                  {...register("bio")}
                   rows={4}
                   placeholder="Tell us about yourself, your experiences and goals..."
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 text-white resize-none"
                 />
+                {errors.bio && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errors.bio.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>

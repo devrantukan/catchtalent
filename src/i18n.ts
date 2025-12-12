@@ -1,18 +1,21 @@
 import { getRequestConfig } from "next-intl/server";
-import { createSharedPathnamesNavigation } from "next-intl/navigation";
+import { createNavigation } from "next-intl/navigation";
+import type { ReactNode } from "react";
 
 export const locales = ["en", "tr"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "en";
 
-export const { Link, redirect, usePathname, useRouter } =
-  createSharedPathnamesNavigation({ locales });
+export const { Link, redirect, usePathname, useRouter } = createNavigation({
+  locales,
+});
 
 export default getRequestConfig(async ({ locale }) => {
   // Ensure locale is one of our supported locales
-  const validLocale = locales.includes(locale as Locale)
-    ? locale
-    : defaultLocale;
+  const validLocale: Locale =
+    locale && locales.includes(locale as Locale)
+      ? (locale as Locale)
+      : defaultLocale;
 
   try {
     const messages = await import(`../messages/${validLocale}.json`).then(
@@ -25,7 +28,7 @@ export default getRequestConfig(async ({ locale }) => {
       timeZone: "Europe/Istanbul",
       now: new Date(),
       defaultTranslationValues: {
-        strong: (chunks) => chunks,
+        strong: (chunks: ReactNode) => chunks,
       },
       onError(error) {
         console.error("i18n error:", error);
@@ -43,7 +46,7 @@ export default getRequestConfig(async ({ locale }) => {
       timeZone: "Europe/Istanbul",
       now: new Date(),
       defaultTranslationValues: {
-        strong: (chunks) => chunks,
+        strong: (chunks: ReactNode) => chunks,
       },
       onError(error) {
         console.error("i18n error:", error);
