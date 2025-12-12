@@ -11,6 +11,13 @@ interface VimeoVideo {
   link: string;
   player_embed_url: string;
   tags: string[];
+  pictures?: {
+    sizes: Array<{
+      width: number;
+      height: number;
+      link: string;
+    }>;
+  };
 }
 
 export default function Portfolio() {
@@ -32,7 +39,7 @@ export default function Portfolio() {
 
         while (hasMorePages) {
           const response = await fetch(
-            `https://api.vimeo.com/users/catchtalent/videos?page=${page}&per_page=100`,
+            `https://api.vimeo.com/users/catchtalent/videos?page=${page}&per_page=100&fields=uri,name,description,link,player_embed_url,tags,pictures`,
             {
               headers: {
                 Authorization: `Bearer 4a46b11caf05c35a575523384b5d936e`,
@@ -136,40 +143,61 @@ export default function Portfolio() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredVideos.map((video, index) => (
-            <motion.div
-              key={video.uri}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative aspect-video bg-gray-900 rounded-lg overflow-hidden"
-            >
-              <iframe
-                src={`${video.player_embed_url}?title=0&byline=0&portrait=0&background=1`}
-                className="absolute top-0 left-0 w-full h-full transition-transform duration-700 group-hover:scale-105"
-                frameBorder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-lg font-medium mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    {video.name}
-                  </h3>
-                  <button
-                    onClick={() => {
-                      const videoId = video.uri.split("/").pop();
-                      if (videoId) setSelectedVideo(videoId);
-                    }}
-                    className="text-sm text-gray-300 hover:text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75"
-                  >
-                    Watch Full Video →
-                  </button>
+          {filteredVideos.map((video, index) => {
+            const videoId = video.uri.split("/").pop() || "";
+            // Get the largest thumbnail or fallback
+            const thumbnail =
+              video.pictures?.sizes?.sort((a, b) => b.width - a.width)[0]
+                ?.link || `https://i.vimeocdn.com/video/${videoId}_640.jpg`;
+
+            return (
+              <motion.div
+                key={video.uri}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group relative aspect-video bg-gray-900 rounded-lg overflow-hidden cursor-pointer"
+                onClick={() => {
+                  if (videoId) setSelectedVideo(videoId);
+                }}
+              >
+                <img
+                  src={thumbnail}
+                  alt={video.name}
+                  className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-white/30 transition-colors">
+                      <svg
+                        className="w-8 h-8 text-white ml-1"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h3 className="text-lg font-medium mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      {video.name}
+                    </h3>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (videoId) setSelectedVideo(videoId);
+                      }}
+                      className="text-sm text-gray-300 hover:text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75"
+                    >
+                      Watch Full Video →
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 

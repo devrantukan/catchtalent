@@ -11,7 +11,28 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.vimeocdn.com',
+      },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-src 'self' https://player.vimeo.com https://vimeo.com; frame-ancestors 'self';",
+          },
+        ],
+      },
+    ];
   },
 };
 
