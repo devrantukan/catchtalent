@@ -5,7 +5,7 @@ const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['i.vimeocdn.com', 'vimeo.com', 'images.unsplash.com'],
+    domains: ['i.vimeocdn.com', 'vimeo.com', 'images.unsplash.com', 'tukanft.com'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -14,6 +14,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'i.vimeocdn.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'tukanft.com',
       },
     ],
   },

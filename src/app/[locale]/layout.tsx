@@ -2,6 +2,7 @@ import { locales } from "@/i18n";
 
 import { Inter } from "next/font/google";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import Script from "next/script";
 
 import { NextIntlClientProvider } from "next-intl";
@@ -62,11 +63,25 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
       </head>
       <body className={inter.className} suppressHydrationWarning>
         <Script src="https://player.vimeo.com/api/player.js" />
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-WRCDSD3JCC"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-WRCDSD3JCC');
+          `}
+        </Script>
         <div lang={locale}>
           <NextIntlClientProvider messages={messages} locale={locale}>
-            <div className="min-h-screen">
+            <div className="min-h-screen flex flex-col">
               <Navigation />
-              <main>{children}</main>
+              <main className="flex-1">{children}</main>
+              <Footer />
             </div>
           </NextIntlClientProvider>
         </div>
